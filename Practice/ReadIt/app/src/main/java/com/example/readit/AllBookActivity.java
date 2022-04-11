@@ -14,5 +14,7 @@ public class AllBookActivity extends AppCompatActivity {
         setContentView(R.layout.activity_all_book);
 
         allBookRV=findViewById(R.id.allBookRecyclerView);
+        BookAdapter adapter = new BookAdapter(this);
+
     }
 }

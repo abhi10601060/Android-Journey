@@ -2,21 +2,26 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/book_card"
-    android:padding="10dp">
+    android:padding="10dp"
+    android:layout_marginTop="20dp"
+    android:layout_marginLeft="20dp"
+    android:elevation="20dp"
+    app:cardCornerRadius="10dp">
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <TextView
+            android:id="@+id/book_name_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
             android:text="Book Name"
             android:textSize="20dp"
-            android:textStyle="bold"
-            android:id="@+id/book_name_txt"
-            android:layout_centerHorizontal="true"/>
+            android:textStyle="bold" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -35,13 +40,15 @@
             android:layout_marginLeft="5dp"/>
 
         <ImageView
+            android:id="@+id/book_image"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:src="@drawable/ic_launcher_background"
             android:layout_below="@+id/pages_text"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
-            android:id="@+id/book_image"/>
+            android:src="@drawable/ic_launcher_background"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -49,7 +56,8 @@
             android:id="@+id/short_description_txt"
             android:layout_below="@id/book_image"
             android:layout_marginTop="10dp"
-            android:text="Short Description :"/>
+            android:text="Short Description :"
+            android:layout_marginLeft="5dp"/>
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>
