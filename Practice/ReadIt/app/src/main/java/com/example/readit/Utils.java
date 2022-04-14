@@ -40,15 +40,6 @@ public class Utils {
         }
     }
 
-
-    public ArrayList<Book> getCurBooks() {
-        return curBooks;
-    }
-
-    public void setCurBooks(ArrayList<Book> curBooks) {
-        this.curBooks = curBooks;
-    }
-
     private void initData() {
         allBooks.add( new Book(500,"Kakashi", "Abhi hhh", 500,"https://s4.anilist" +
                 ".co/file/anilistcdn/character/large/b85-mkVBh2yjxjmx.png","Hello" +
@@ -66,41 +57,42 @@ public class Utils {
         return allBooks;
     }
 
-    public void setAllBooks(ArrayList<Book> allBooks) {
-        this.allBooks = allBooks;
-    }
-
     public ArrayList<Book> getWishlistBooks() {
         return wishlistBooks;
-    }
-
-    public void setWishlistBooks(ArrayList<Book> wishlistBooks) {
-        this.wishlistBooks = wishlistBooks;
     }
 
     public ArrayList<Book> getAlreadyReadBooks() {
         return alreadyReadBooks;
     }
 
-    public void setAlreadyReadBooks(ArrayList<Book> alreadyReadBooks) {
-        this.alreadyReadBooks = alreadyReadBooks;
-    }
-
     public ArrayList<Book> getFavBooks() {
         return favBooks;
     }
 
-    public void setFavBooks(ArrayList<Book> favBooks) {
-        this.favBooks = favBooks;
+    public ArrayList<Book> getCurBooks() {
+        return curBooks;
     }
 
-    public Book getBook(int id){
+
+    public Book getBookById(int id){
         for(Book b : allBooks){
             if(b.getId()==id){
                 return b;
             }
         }
         return null;
+    }
+
+    public boolean addToAlreadyRead(Book book){
+        return this.alreadyReadBooks.add(book);
+    }
+
+    public boolean addToFav(Book book){
+        return this.favBooks.add(book);
+    }
+
+    public  boolean addToWishList(Book book){
+        return this.wishlistBooks.add(book);
     }
 
 
