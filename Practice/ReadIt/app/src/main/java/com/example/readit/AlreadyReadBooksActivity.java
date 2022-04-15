@@ -19,6 +19,7 @@ import java.util.ArrayList;
 
 public class AlreadyReadBooksActivity extends AppCompatActivity {
     private RecyclerView alreadyreadBooksRV;
+    private String id = "alreadyReadBooks";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +28,7 @@ public class AlreadyReadBooksActivity extends AppCompatActivity {
 
         alreadyreadBooksRV = findViewById(R.id.alreadyReadBooksReyclerView);
 
-        BookAdapter adapter = new BookAdapter(this);
+        BookAdapter adapter = new BookAdapter(this,id);
 
         ArrayList<Book> books = Utils.getInstance().getAlreadyReadBooks();
 

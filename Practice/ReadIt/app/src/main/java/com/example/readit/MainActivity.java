@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
-    private Button allBk , curBk ,wishlist , favBk , about , completeBk;
+    private Button allBk , curBk ,wishlist , favBk , about , completeBk ;
 
 
     @Override
@@ -43,6 +43,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this,WishListActivity.class );
+                startActivity(intent);
+            }
+        });
+        curBk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent= new Intent(MainActivity.this,CurReadingBooksActivity.class);
                 startActivity(intent);
             }
         });

@@ -95,6 +95,20 @@ public class Utils {
         return this.wishlistBooks.add(book);
     }
 
+    public boolean addToCur(Book book){return this.curBooks.add(book);}
 
+    public boolean removeFromAlreadyRead(Book book){
+        return this.alreadyReadBooks.remove(book);
+    }
+
+    public boolean removeFromFav(Book book){
+        return this.favBooks.remove(book);
+    }
+
+    public boolean removeFromWishList(Book book){
+        return this.wishlistBooks.remove(book);
+    }
+
+    public boolean removeFromCur(Book book){return this.curBooks.remove(book);}
 
 }

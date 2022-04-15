@@ -17,6 +17,7 @@ import android.os.Bundle;
 
 public class FavouritesActivity extends AppCompatActivity {
     private RecyclerView favRV;
+    private String id = "FavouriteBooks";
 
 
     @Override
@@ -26,7 +27,7 @@ public class FavouritesActivity extends AppCompatActivity {
 
         favRV = findViewById(R.id.favouritesRecyclerView);
 
-        BookAdapter adapter = new BookAdapter(this);
+        BookAdapter adapter = new BookAdapter(this,id);
         adapter.setBooks(Utils.getInstance().getFavBooks());
 
         favRV.setAdapter(adapter);

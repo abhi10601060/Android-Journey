@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 public class AllBookActivity extends AppCompatActivity {
     private RecyclerView allBookRV;
+    private String id = "allBooks";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +26,7 @@ public class AllBookActivity extends AppCompatActivity {
 
 
         allBookRV=findViewById(R.id.allBookRecyclerView);
-        BookAdapter adapter = new BookAdapter(this);
+        BookAdapter adapter = new BookAdapter(this, id);
 
         adapter.setBooks(Utils.getInstance().getAllBooks());
 

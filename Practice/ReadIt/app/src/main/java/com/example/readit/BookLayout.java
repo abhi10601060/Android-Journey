@@ -36,6 +36,7 @@ public class BookLayout extends AppCompatActivity {
                     handleAlreadyReadBook(incomingBook);
                     handleFavBook(incomingBook);
                     handleWishList(incomingBook);
+                    handleCur(incomingBook);
 
                 }
 
@@ -158,5 +159,40 @@ public class BookLayout extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    private  void handleCur(Book book){
+        ArrayList<Book> curBooks =Utils.getInstance().getCurBooks();
+
+        btnstart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                boolean bookExist = false;
+                for(Book b : curBooks){
+                    if(book.getId()==b.getId()){
+                        bookExist=true;
+                    }
+                }
+                if(bookExist){
+                    Intent intent = new Intent(BookLayout.this,ActualBookActivity.class);
+                    intent.putExtra("BookId",book.getId());
+                    startActivity(intent);
+                }
+                else {
+                    if (Utils.getInstance().addToCur(book)){
+                        Toast.makeText(BookLayout.this, "Book Added", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(BookLayout.this,ActualBookActivity.class);
+                        intent.putExtra("BookId",book.getId());
+                        startActivity(intent);
+                    }
+                    else {
+                        Toast.makeText(BookLayout.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+
+
+
     }
 }

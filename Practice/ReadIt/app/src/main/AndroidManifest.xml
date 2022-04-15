@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ReadIt">
         <activity
+            android:name=".CurReadingBooksActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ActualBookActivity"
+            android:exported="false" />
+        <activity
             android:name=".FavouritesActivity"
             android:exported="false" />
         <activity

@@ -17,6 +17,7 @@ import android.os.Bundle;
 
 public class WishListActivity extends AppCompatActivity {
     private RecyclerView wishListRV;
+    private String id = "Wishlist";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +26,7 @@ public class WishListActivity extends AppCompatActivity {
 
         wishListRV= findViewById(R.id.WishListRecyclerView);
 
-        BookAdapter  adapter = new BookAdapter(this);
+        BookAdapter  adapter = new BookAdapter(this,id);
 
         adapter.setBooks(Utils.getInstance().getWishlistBooks());
 
