@@ -8,12 +8,14 @@
 
 package com.example.readit;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import java.util.ArrayList;
 
@@ -26,11 +28,13 @@ public class AlreadyReadBooksActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_already_read_books);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         alreadyreadBooksRV = findViewById(R.id.alreadyReadBooksReyclerView);
 
         BookAdapter adapter = new BookAdapter(this,id);
 
-        ArrayList<Book> books = Utils.getInstance().getAlreadyReadBooks();
+        ArrayList<Book> books = Utils.getInstance(this).getAlreadyReadBooks();
 
         adapter.setBooks(books);
 
@@ -43,5 +47,17 @@ public class AlreadyReadBooksActivity extends AppCompatActivity {
         Intent intent = new Intent(this,MainActivity.class);
         intent.setFlags(intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()){
+            case android.R.id.home:
+                onBackPressed();
+                break;
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

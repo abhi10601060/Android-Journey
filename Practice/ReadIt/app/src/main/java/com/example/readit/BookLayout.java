@@ -1,9 +1,11 @@
 package com.example.readit;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -24,13 +26,15 @@ public class BookLayout extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_layout);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         viewinit();
 
         Intent intent = getIntent();
         if(intent!=null){
             int bookId = intent.getIntExtra("bookId",-1);
             if(bookId !=-1){
-                Book incomingBook = Utils.getInstance().getBookById(bookId);
+                Book incomingBook = Utils.getInstance(this).getBookById(bookId);
                 if(incomingBook!=null){
                     setView(incomingBook);
                     handleAlreadyReadBook(incomingBook);
@@ -71,9 +75,21 @@ public class BookLayout extends AppCompatActivity {
         short_description.setText(book.getShortDesc());
         long_description.setText(book.getLongDesc());
     }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()){
+            case android.R.id.home:
+                onBackPressed();
+                break;
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     private void handleAlreadyReadBook(Book book){
-        ArrayList<Book> alreadyReadBooks = Utils.getInstance().getAlreadyReadBooks();
+        ArrayList<Book> alreadyReadBooks = Utils.getInstance(this).getAlreadyReadBooks();
         boolean alreadyExist=false;
         for(Book b : alreadyReadBooks){
             if(book.getId()==b.getId()){
@@ -88,7 +104,7 @@ public class BookLayout extends AppCompatActivity {
             alreadybtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if(Utils.getInstance().addToAlreadyRead(book)){
+                    if(Utils.getInstance(BookLayout.this).addToAlreadyRead(book)){
                         Toast.makeText(BookLayout.this, "You have already read this book..", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(BookLayout.this,AlreadyReadBooksActivity.class);
                         startActivity(intent);
@@ -102,7 +118,7 @@ public class BookLayout extends AppCompatActivity {
     }
 
     private void handleFavBook(Book book){
-        ArrayList<Book> favBooks=Utils.getInstance().getFavBooks();
+        ArrayList<Book> favBooks=Utils.getInstance(BookLayout.this).getFavBooks();
         boolean bookExist = false;
 
         for(Book b : favBooks){
@@ -118,7 +134,7 @@ public class BookLayout extends AppCompatActivity {
             btnfav.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if(Utils.getInstance().addToFav(book)){
+                    if(Utils.getInstance(BookLayout.this).addToFav(book)){
                         Toast.makeText(BookLayout.this, "Added to favourites", Toast.LENGTH_SHORT).show();
 
                         Intent intent = new Intent(BookLayout.this,FavouritesActivity.class);
@@ -133,7 +149,7 @@ public class BookLayout extends AppCompatActivity {
     }
 
     private void handleWishList(Book book){
-        ArrayList<Book> wishlist =Utils.getInstance().getWishlistBooks();
+        ArrayList<Book> wishlist =Utils.getInstance(BookLayout.this).getWishlistBooks();
         boolean bookExist = false;
 
         for(Book b : wishlist){
@@ -148,7 +164,7 @@ public class BookLayout extends AppCompatActivity {
             btnwishlist.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if(Utils.getInstance().addToWishList(book)){
+                    if(Utils.getInstance(BookLayout.this).addToWishList(book)){
                         Toast.makeText(BookLayout.this, "Added to Your WishList", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(BookLayout.this, WishListActivity.class);
                         startActivity(intent);
@@ -162,7 +178,7 @@ public class BookLayout extends AppCompatActivity {
     }
 
     private  void handleCur(Book book){
-        ArrayList<Book> curBooks =Utils.getInstance().getCurBooks();
+        ArrayList<Book> curBooks =Utils.getInstance(this).getCurBooks();
 
         btnstart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -179,7 +195,7 @@ public class BookLayout extends AppCompatActivity {
                     startActivity(intent);
                 }
                 else {
-                    if (Utils.getInstance().addToCur(book)){
+                    if (Utils.getInstance(BookLayout.this).addToCur(book)){
                         Toast.makeText(BookLayout.this, "Book Added", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(BookLayout.this,ActualBookActivity.class);
                         intent.putExtra("BookId",book.getId());

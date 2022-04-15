@@ -1,10 +1,12 @@
 package com.example.readit;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import java.util.ArrayList;
 
@@ -17,7 +19,7 @@ public class AllBookActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_book);
 
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 //        ArrayList<Book> books = new ArrayList<>();
 //        books.add(new Book(500,"Kakashi", "Abhi hhh", 500,"https://s4.anilist" +
@@ -28,10 +30,22 @@ public class AllBookActivity extends AppCompatActivity {
         allBookRV=findViewById(R.id.allBookRecyclerView);
         BookAdapter adapter = new BookAdapter(this, id);
 
-        adapter.setBooks(Utils.getInstance().getAllBooks());
+        adapter.setBooks(Utils.getInstance(this).getAllBooks());
 
         allBookRV.setAdapter(adapter);
         allBookRV.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
 
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()){
+            case android.R.id.home:
+                onBackPressed();
+                break;
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

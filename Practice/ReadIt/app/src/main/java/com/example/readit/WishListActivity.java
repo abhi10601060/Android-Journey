@@ -8,12 +8,14 @@
 
 package com.example.readit;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 
 public class WishListActivity extends AppCompatActivity {
     private RecyclerView wishListRV;
@@ -24,11 +26,13 @@ public class WishListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wish_list);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         wishListRV= findViewById(R.id.WishListRecyclerView);
 
         BookAdapter  adapter = new BookAdapter(this,id);
 
-        adapter.setBooks(Utils.getInstance().getWishlistBooks());
+        adapter.setBooks(Utils.getInstance(this).getWishlistBooks());
 
         wishListRV.setAdapter(adapter);
         wishListRV.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
@@ -42,5 +46,17 @@ public class WishListActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()){
+            case android.R.id.home:
+                onBackPressed();
+                break;
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

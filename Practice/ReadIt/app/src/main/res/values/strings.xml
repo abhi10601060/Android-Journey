@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">readIt</string>
+    <string name="All_Books">All Books</string>
+    <string name="Alredy_Read">Already Read Books</string>
+    <string name="Book_details">Book Details</string>
+    <string name="cur_reading_books">Currently Reading Books</string>
+    <string name="fav_books">Your Favourite Books</string>
+    <string name="WishList">Your WishList</string>
 </resources>

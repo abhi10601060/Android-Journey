@@ -8,12 +8,14 @@
 
 package com.example.readit;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 
 public class FavouritesActivity extends AppCompatActivity {
     private RecyclerView favRV;
@@ -25,10 +27,12 @@ public class FavouritesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favourites);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         favRV = findViewById(R.id.favouritesRecyclerView);
 
         BookAdapter adapter = new BookAdapter(this,id);
-        adapter.setBooks(Utils.getInstance().getFavBooks());
+        adapter.setBooks(Utils.getInstance(this).getFavBooks());
 
         favRV.setAdapter(adapter);
         favRV.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
@@ -39,5 +43,17 @@ public class FavouritesActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()){
+            case android.R.id.home:
+                onBackPressed();
+                break;
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
