@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ReadIt">
         <activity
+            android:name=".WebviewActivity"
+            android:exported="false" />
+        <activity
             android:name=".CurReadingBooksActivity"
             android:exported="false" />
         <activity
